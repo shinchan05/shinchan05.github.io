@@ -1,384 +1,988 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manjunath Reddy | Embedded Systems & Robotics Engineer</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI,sans-serif;
-}
-    html{
-    scroll-behavior:smooth;
-}
-
-.navbar{
-    position:fixed;
-    top:0;
-    width:100%;
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    padding:18px;
-    background:rgba(13,17,23,0.9);
-    backdrop-filter:blur(10px);
-    z-index:1000;
-}
-
-.navbar a{
-    color:white;
-    text-decoration:none;
-    font-weight:600;
-    transition:0.3s;
-}
-
-.navbar a:hover{
-    color:#58a6ff;
-}
-body{
-    background:#0d1117;
-    color:white;
-    line-height:1.6;
-    overflow-x:hidden;
-    position:relative;
-}
-body::before{
-    content:"";
-    position:fixed;
-    top:-20%;
-    left:-20%;
-    width:140%;
-    height:140%;
-    background:
-        radial-gradient(circle at 20% 30%, rgba(88,166,255,0.15), transparent 30%),
-        radial-gradient(circle at 80% 40%, rgba(0,180,255,0.10), transparent 30%),
-        radial-gradient(circle at 60% 80%, rgba(88,166,255,0.12), transparent 35%);
-    animation: floatGlow 18s ease-in-out infinite alternate;
-    z-index:-2;
-}
-
-@keyframes floatGlow{
-    0%{
-        transform:translate(0,0) scale(1);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manjunath Reddy | Embedded Systems & Firmware Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #080c14;
+      --card:      #111827;
+      --card-h:    #151f30;
+      --accent:    #58a6ff;
+      --adim:      rgba(88,166,255,0.11);
+      --green:     #3fb950;
+      --text:      #e2e8f0;
+      --muted:     #7d8fa8;
+      --bdr:       rgba(88,166,255,0.15);
+      --bdr-s:     rgba(255,255,255,0.06);
+      --fh:        'Space Grotesk', sans-serif;
+      --fb:        'Inter', sans-serif;
+      --fm:        'JetBrains Mono', monospace;
     }
-    100%{
-        transform:translate(-50px,-30px) scale(1.1);
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
-}
-    body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:
-        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.4), transparent),
-        radial-gradient(2px 2px at 70% 20%, rgba(255,255,255,0.3), transparent),
-        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.4), transparent),
-        radial-gradient(2px 2px at 90% 70%, rgba(255,255,255,0.3), transparent);
-    background-repeat:repeat;
-    background-size:500px 500px;
-    opacity:0.3;
-    z-index:-1;
-}
 
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:center;
-max-width:1200px;
-margin:auto;
-min-height:85vh;
-padding:40px;
-gap:50px;
-}
+    /* Ambient glow */
+    body::before {
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(ellipse 70% 55% at 18% 18%, rgba(88,166,255,.055) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 82% 78%, rgba(88,166,255,.04) 0%, transparent 65%);
+      pointer-events:none; z-index:-1;
+    }
 
-.hero-text{
-flex:1;
-}
+    /* ===== DECORATIONS LAYER ===== */
+    #bg-deco {
+      position:fixed; inset:0;
+      pointer-events:none; z-index:0;
+      overflow:hidden;
+    }
 
-.hero-text h1{
-font-size:3.3rem;
-line-height:1.1;
-}
+    .deco-star {
+      position:absolute;
+      color: var(--accent);
+      animation: twinkle var(--dur,3s) ease-in-out var(--del,0s) infinite;
+      user-select:none; line-height:1;
+    }
 
-.hero-text h2{
-color:#58a6ff;
-margin:20px 0;
-}
+    .deco-robot {
+      position:absolute;
+      font-size: var(--sz,15px);
+      opacity: var(--op,.1);
+      animation: roboFloat var(--dur,6s) ease-in-out var(--del,0s) infinite;
+      user-select:none;
+    }
 
-.hero-text p{
-color:#c9d1d9;
-max-width:600px;
-margin-bottom:30px;
-}
+    @keyframes twinkle {
+      0%,100% { opacity:.08; transform:scale(.75); }
+      50%      { opacity:.65; transform:scale(1.25); }
+    }
 
-.hero-image{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    position:relative;
-}
+    @keyframes roboFloat {
+      0%,100% { transform:translateY(0) rotate(-4deg); }
+      50%      { transform:translateY(-9px) rotate(4deg); }
+    }
 
-.hero-image::before{
-    content:"";
-    position:absolute;
-    width:420px;
-    height:420px;
-    border-radius:50%;
-    background:rgba(88,166,255,0.15);
-    filter:blur(80px);
-    z-index:-1;
-}
+    /* ===== NAVBAR ===== */
+    .nav {
+      position:fixed; top:0; width:100%; z-index:1000;
+      height:60px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 48px;
+      background:rgba(8,12,20,.85);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--bdr-s);
+    }
+    .nav-logo {
+      font-family:var(--fh); font-weight:700; font-size:1rem;
+      color:var(--text); text-decoration:none; letter-spacing:.01em;
+    }
+    .nav-logo em { font-style:normal; color:var(--accent); }
+    .nav-links { display:flex; gap:4px; }
+    .nav-links a {
+      color:var(--muted); text-decoration:none;
+      font-size:.83rem; font-weight:500;
+      padding:6px 13px; border-radius:6px;
+      transition:color .2s, background .2s;
+    }
+    .nav-links a:hover { color:var(--text); background:var(--adim); }
 
-.hero-image img{
-width:350px;
-height:350px;
-border-radius:50%;
-object-fit:cover;
-border:5px solid #58a6ff;
-box-shadow:0 0 40px rgba(88,166,255,0.5);
-}
+    /* ===== HERO ===== */
+    .hero {
+      min-height:100vh; display:flex; align-items:center;
+      max-width:1200px; margin:0 auto;
+      padding:80px 48px 60px; gap:64px;
+      position:relative; z-index:1;
+    }
+    .hero-content { flex:1; }
 
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:9px;
+      padding:6px 15px; border:1px solid var(--bdr);
+      border-radius:100px; font-family:var(--fm);
+      font-size:.75rem; color:var(--accent);
+      background:var(--adim); margin-bottom:30px;
+    }
+    .hero-badge .dot {
+      width:7px; height:7px; border-radius:50%;
+      background:var(--green); box-shadow:0 0 7px var(--green);
+      animation:blink 2.2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-header h1{
-    font-size:3rem;
-}
+    .hero-title {
+      font-family:var(--fh);
+      font-size:clamp(2.4rem,5.5vw,3.9rem);
+      font-weight:700; line-height:1.08;
+      letter-spacing:-.025em; margin-bottom:14px;
+    }
+    .hero-title .a { color:var(--accent); }
 
-header h2{
-    color:#58a6ff;
-    margin-top:10px;
-}
+    .hero-sub {
+      font-family:var(--fm); font-size:.91rem; color:var(--muted); margin-bottom:18px;
+    }
+    .hero-sub .k { color:var(--accent); }
 
-header p{
-    max-width:700px;
-    margin:20px auto;
-    color:#c9d1d9;
-}
+    .hero-desc {
+      font-size:.99rem; color:var(--muted);
+      max-width:500px; line-height:1.75; margin-bottom:34px;
+    }
 
-.btn{
-    display:inline-block;
-    padding:12px 24px;
-    margin:10px;
-    border-radius:8px;
-    text-decoration:none;
-    color:white;
-    background:#238636;
-}
+    .hero-btns { display:flex; flex-wrap:wrap; gap:11px; }
 
-section{
-    max-width:1000px;
-    margin:auto;
-    padding:60px 20px;
-}
+    .btn-p {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 22px; background:var(--accent); color:#000;
+      border-radius:8px; text-decoration:none;
+      font-weight:600; font-size:.88rem; transition:all .2s;
+    }
+    .btn-p:hover { background:#79bcff; transform:translateY(-2px); box-shadow:0 8px 24px rgba(88,166,255,.28); }
 
-h3{
-    font-size:2rem;
-    margin-bottom:20px;
-    color:#58a6ff;
-}
+    .btn-s {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 20px; border:1px solid var(--bdr-s); color:var(--text);
+      border-radius:8px; text-decoration:none;
+      font-weight:500; font-size:.88rem;
+      background:rgba(255,255,255,.025); transition:all .2s;
+    }
+    .btn-s:hover { border-color:var(--accent); color:var(--accent); background:var(--adim); }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
+    /* Profile image */
+    .hero-visual { flex-shrink:0; position:relative; padding:28px 110px 28px 28px; }
 
-.card{
-    background:#161b22;
-    padding:20px;
-    border-radius:12px;
-    transition:all 0.3s ease;
-}
+    .ring-wrap { position:relative; width:280px; height:280px; }
+    .ring-wrap::before {
+      content:""; position:absolute; inset:-22px; border-radius:50%;
+      border:1.5px dashed rgba(88,166,255,.22);
+      animation:orbit 22s linear infinite;
+    }
+    .ring-wrap::after {
+      content:""; position:absolute; inset:-5px; border-radius:50%;
+      box-shadow:0 0 0 2px rgba(88,166,255,.28), 0 0 40px rgba(88,166,255,.1);
+    }
+    @keyframes orbit { to { transform:rotate(360deg); } }
+    .ring-wrap img {
+      width:280px; height:280px; border-radius:50%;
+      object-fit:cover; border:3px solid rgba(88,166,255,.35);
+      display:block; position:relative; z-index:1;
+    }
 
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 0 25px rgba(88,166,255,0.2);
-}
-    .btn{
-    transition:all 0.3s ease;
-}
+    .chip {
+      position:absolute; padding:6px 13px;
+      background:var(--card); border:1px solid var(--bdr);
+      border-radius:8px; font-family:var(--fm);
+      font-size:.72rem; color:var(--accent); white-space:nowrap; z-index:2;
+    }
+    .chip-1 { top:12px;  right:0;   animation:cy 4s ease-in-out infinite 0s; }
+    .chip-2 { bottom:48px; right:0; animation:cy 4s ease-in-out infinite 1.3s; }
+    .chip-3 { top:50%; left:-8px; transform:translateY(-50%); animation:cy3 4s ease-in-out infinite 2.1s; }
 
-.btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 0 20px rgba(35,134,54,0.4);
-}
+    @keyframes cy  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    @keyframes cy3 { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 7px))} }
 
-footer{
-    text-align:center;
-    padding:30px;
-    color:#8b949e;
-}
-</style>
+    /* ===== COMMON SECTION ===== */
+    .section {
+      max-width:1100px; margin:0 auto;
+      padding:80px 48px; position:relative; z-index:1;
+    }
+    .sec-lbl {
+      font-family:var(--fm); font-size:.75rem; color:var(--accent);
+      letter-spacing:.16em; text-transform:uppercase;
+      margin-bottom:10px; display:flex; align-items:center; gap:12px;
+    }
+    .sec-lbl::after { content:""; height:1px; background:var(--bdr-s); width:48px; }
+    .sec-title {
+      font-family:var(--fh);
+      font-size:clamp(1.55rem,3vw,2.1rem);
+      font-weight:700; letter-spacing:-.015em; margin-bottom:44px;
+    }
+    .divider { border:none; height:1px; background:var(--bdr-s); max-width:1100px; margin:0 auto; }
 
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display:grid; grid-template-columns:1.1fr 0.9fr;
+      gap:64px; align-items:start;
+    }
+    .about-text p { color:var(--muted); line-height:1.8; margin-bottom:14px; font-size:.97rem; }
+    .about-text strong { color:var(--text); font-weight:600; }
+
+    .coursework {
+      margin-top:22px; padding:18px 20px;
+      background:var(--card); border:1px solid var(--bdr-s);
+      border-radius:12px;
+    }
+    .cw-lbl { font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.09em; font-weight:600; margin-bottom:11px; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .tag {
+      padding:4px 12px; background:var(--adim);
+      border:1px solid var(--bdr); border-radius:100px;
+      font-family:var(--fm); font-size:.72rem; color:var(--accent);
+    }
+
+    .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .stat-card {
+      background:var(--card); border:1px solid var(--bdr-s);
+      border-radius:13px; padding:20px 16px; text-align:center;
+      transition:border-color .2s, transform .2s;
+    }
+    .stat-card:hover { border-color:var(--bdr); transform:translateY(-3px); }
+    .stat-num { font-family:var(--fh); font-size:1.85rem; font-weight:700; color:var(--accent); line-height:1; margin-bottom:5px; }
+    .stat-lbl { font-size:.79rem; color:var(--muted); line-height:1.35; }
+
+    /* ===== SKILLS ===== */
+    .skills-cols { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+    .sk-grp-lbl { font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.09em; font-weight:600; margin-bottom:22px; }
+
+    .skill-item { margin-bottom:20px; }
+    .skill-head { display:flex; justify-content:space-between; margin-bottom:8px; font-size:.88rem; }
+    .skill-name { font-weight:500; color:var(--text); }
+    .skill-pct { font-family:var(--fm); font-size:.78rem; color:var(--accent); }
+    .skill-track { height:5px; background:rgba(255,255,255,.06); border-radius:100px; overflow:hidden; }
+    .skill-bar {
+      height:100%; width:0;
+      background:linear-gradient(90deg,var(--accent),#9eceff);
+      border-radius:100px;
+      transition:width 1.3s cubic-bezier(.22,1,.36,1);
+    }
+
+    .tag-section {
+      margin-top:52px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:26px;
+    }
+    .tg-lbl { font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.09em; font-weight:600; margin-bottom:11px; }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position:relative; padding-left:36px; }
+    .timeline::before {
+      content:""; position:absolute; left:0; top:10px; bottom:0;
+      width:2px; background:linear-gradient(to bottom,var(--accent),rgba(88,166,255,0));
+    }
+    .tl-item { position:relative; margin-bottom:44px; }
+    .tl-item:last-child { margin-bottom:0; }
+    .tl-item::before {
+      content:""; position:absolute; left:-40px; top:7px;
+      width:10px; height:10px; border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 0 3px var(--bg), 0 0 10px var(--accent);
+    }
+    .tl-date { font-family:var(--fm); font-size:.75rem; color:var(--muted); margin-bottom:6px; }
+    .tl-role { font-family:var(--fh); font-size:1.07rem; font-weight:600; margin-bottom:3px; }
+    .tl-org { font-size:.9rem; color:var(--accent); margin-bottom:11px; }
+    .tl-body { font-size:.9rem; color:var(--muted); line-height:1.75; max-width:680px; }
+    .tl-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
+
+    /* ===== PROJECTS ===== */
+    .proj-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+
+    .proj-card {
+      background:var(--card); border:1px solid var(--bdr-s);
+      border-radius:14px; padding:24px; position:relative; overflow:hidden;
+      transition:transform .22s, border-color .22s, box-shadow .22s;
+    }
+    .proj-card::before {
+      content:""; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--accent),transparent);
+      opacity:0; transition:opacity .22s;
+    }
+    .proj-card:hover { transform:translateY(-5px); border-color:rgba(88,166,255,.22); box-shadow:0 16px 48px rgba(0,0,0,.35); }
+    .proj-card:hover::before { opacity:1; }
+
+    .proj-icon { width:44px; height:44px; border-radius:10px; background:var(--adim); display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:15px; }
+    .proj-title { font-family:var(--fh); font-size:1rem; font-weight:600; margin-bottom:9px; }
+    .proj-desc { font-size:.86rem; color:var(--muted); line-height:1.65; margin-bottom:15px; }
+    .proj-tags { display:flex; flex-wrap:wrap; gap:6px; }
+
+    /* Mini project grid */
+    .mini-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-top:12px; }
+    .mini-card {
+      background:var(--card); border:1px solid var(--bdr-s);
+      border-radius:10px; padding:16px;
+      transition:border-color .2s, transform .2s;
+    }
+    .mini-card:hover { border-color:var(--bdr); transform:translateY(-3px); }
+    .mini-card .mc-icon { font-size:1.1rem; margin-bottom:8px; }
+    .mini-card .mc-title { font-family:var(--fh); font-size:.88rem; font-weight:600; margin-bottom:8px; }
+    .mini-card .mc-tags { display:flex; flex-wrap:wrap; gap:5px; }
+    .mini-tag {
+      padding:3px 9px; background:var(--adim);
+      border:1px solid var(--bdr); border-radius:100px;
+      font-family:var(--fm); font-size:.68rem; color:var(--accent);
+    }
+
+    /* ===== PUBLICATIONS & ACHIEVEMENTS ===== */
+    .pub-ach-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+
+    .pub-card {
+      background:var(--card); border:1px solid var(--bdr-s);
+      border-left:3px solid var(--accent);
+      border-radius:0 13px 13px 0; padding:22px 26px;
+      transition:transform .2s, box-shadow .2s;
+    }
+    .pub-card:hover { transform:translateX(4px); box-shadow:0 8px 24px rgba(0,0,0,.2); }
+    .pub-type { font-family:var(--fm); font-size:.7rem; color:var(--accent); text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px; }
+    .pub-title { font-family:var(--fh); font-size:.97rem; font-weight:600; margin-bottom:7px; line-height:1.45; }
+    .pub-venue { font-size:.83rem; color:var(--muted); }
+
+    .ach-card {
+      background:var(--card); border:1px solid var(--bdr-s);
+      border-radius:13px; padding:22px 22px;
+      display:flex; gap:16px; align-items:flex-start;
+      transition:border-color .2s, transform .2s;
+    }
+    .ach-card:hover { border-color:var(--bdr); transform:translateY(-3px); }
+    .ach-icon { font-size:1.3rem; flex-shrink:0; margin-top:2px; }
+    .ach-title { font-family:var(--fh); font-size:.95rem; font-weight:600; margin-bottom:5px; }
+    .ach-desc { font-size:.84rem; color:var(--muted); line-height:1.55; }
+
+    /* ===== CONTACT ===== */
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
+    .contact-text p { color:var(--muted); line-height:1.75; font-size:.97rem; margin-bottom:14px; }
+
+    .open-to {
+      margin-top:10px; padding:17px 19px;
+      background:var(--card); border:1px solid var(--bdr-s); border-radius:12px;
+      font-size:.86rem; color:var(--muted); line-height:1.6;
+    }
+    .open-to strong { color:var(--accent); display:block; margin-bottom:5px; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; }
+
+    .contact-links { display:flex; flex-direction:column; gap:12px; }
+    .cl {
+      display:flex; align-items:center; gap:15px;
+      padding:15px 19px; background:var(--card);
+      border:1px solid var(--bdr-s); border-radius:13px;
+      text-decoration:none; color:var(--text); transition:all .2s;
+    }
+    .cl:hover { border-color:var(--accent); background:var(--adim); transform:translateX(5px); }
+    .cl-icon {
+      width:40px; height:40px; border-radius:9px;
+      background:var(--adim); display:flex; align-items:center;
+      justify-content:center; font-size:1rem; flex-shrink:0;
+      font-family:var(--fh); font-weight:700;
+    }
+    .cl-lbl { font-size:.74rem; color:var(--muted); margin-bottom:2px; }
+    .cl-val { font-size:.9rem; font-weight:500; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align:center; padding:30px 20px;
+      color:var(--muted); font-size:.84rem;
+      border-top:1px solid var(--bdr-s);
+      position:relative; z-index:1;
+    }
+    footer em { font-style:normal; color:var(--accent); }
+
+    /* ===== SCROLL FADE ===== */
+    .fade-up {
+      opacity:0; transform:translateY(22px);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.in { opacity:1; transform:translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:820px) {
+      .nav { padding:0 22px; }
+      .nav-links a { font-size:.77rem; padding:6px 8px; }
+      .hero { flex-direction:column-reverse; text-align:center; padding:96px 22px 52px; gap:36px; }
+      .hero-desc { margin:0 auto 30px; }
+      .hero-btns { justify-content:center; }
+      .hero-visual { padding:20px 80px; }
+      .chip { display:none; }
+      .ring-wrap, .ring-wrap img { width:230px; height:230px; }
+      .about-grid, .skills-cols, .contact-grid, .pub-ach-grid { grid-template-columns:1fr; gap:30px; }
+      .section { padding:60px 22px; }
+    }
+  </style>
 </head>
+<body>
 
-<nav class="navbar">
+<!-- Decorations layer (stars + robots) — filled by JS below -->
+<div id="bg-deco"></div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="nav">
+  <a href="#home" class="nav-logo">MR<em>.</em></a>
+  <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
-    <a href="#experience">Experience</a>
+  </div>
 </nav>
 
-<header class="hero">
-
-```
-<div class="hero-text">
-
-    <h1>Manjunath Reddy</h1>
-
-    <h2>Embedded Systems | Robotics | Automation</h2>
-
-    <p>
-        Passionate about Embedded Systems, Robotics,
-        Automation, and Computer Vision. Continuously
-        learning and building practical engineering solutions.
+<!-- ==================== HERO ==================== -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Open to work &nbsp;·&nbsp; Bangalore, India</div>
+    <h1 class="hero-title">Manjunath<br><span class="a">Reddy</span></h1>
+    <p class="hero-sub"><span class="k">&gt;_</span>&nbsp; Embedded Systems &amp; Firmware Engineer</p>
+    <p class="hero-desc">
+      B.Tech in Robotics &amp; Automation · NSDC-Certified Embedded Systems ·
+      Writing bare-metal Embedded C that runs on real hardware — from PIC microcontrollers to UAV flight controllers.
     </p>
+    <div class="hero-btns">
+      <a class="btn-p" href="Manjunath_Reddy_Resume.pdf" target="_blank">↓ &nbsp;Resume</a>
+      <a class="btn-s" href="https://github.com/shinchan05" target="_blank">⌥ &nbsp;GitHub</a>
+      <a class="btn-s" href="https://www.linkedin.com/in/manjunath-yenneddula-9b3476377/" target="_blank">↗ &nbsp;LinkedIn</a>
+    </div>
+  </div>
 
-    <a class="btn" href="Manjunath_Reddy_Resume.pdf" target="_blank">Resume</a>
-
-    <a class="btn" href="https://github.com/shinchan05" target="_blank">GitHub</a>
-
-    <a class="btn" href="https://www.linkedin.com/in/manjunath-yenneddula-9b3476377/" target="_blank">LinkedIn</a>
-
-</div>
-
-<div class="hero-image">
-    <img src="profile.jpg" alt="Manjunath Reddy">
-</div>
-```
-
-</header>
-
-
-<section id="about">
-    <h3>About Me</h3>
-
-
-<p>
-
-Engineering graduate focused on Embedded Systems, Robotics and Automation.
-Passionate about designing reliable embedded solutions, working with
-microcontrollers, communication protocols and real-world engineering systems.
-Currently building practical skills through hands-on projects and continuous learning.
-
-</p>
-
-<section id="experience">
-<h3>Experience</h3>
-
-<div class="cards">
-
-<div class="card">
-<h4>ExoDrone Systems Internship</h4>
-<p>
-Worked on UAV systems, electronics integration, flight controller calibration,
-testing, documentation and system validation activities.
-</p>
-</div>
-
-<div class="card">
-<h4>Emertxe Embedded Systems Training</h4>
-<p>
-Hands-on training in Embedded C programming, microcontrollers,
-communication protocols, debugging and embedded software development.
-</p>
-</div>
-
-</div>
-</section>
+  <div class="hero-visual">
+    <div class="ring-wrap">
+      <img src="profile.jpg" alt="Manjunath Reddy">
+    </div>
+    <div class="chip chip-1">CAN · UART · SPI</div>
+    <div class="chip chip-2">PIC18 · ESP32</div>
+    <div class="chip chip-3">RTOS · Linux</div>
+  </div>
 </section>
 
-<section id="skills">
-    <h3>Skills</h3>
+<hr class="divider">
 
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="section">
+  <div class="sec-lbl">01 — About</div>
+  <h2 class="sec-title">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>
+        I'm an Embedded Systems engineer from Bangalore with a <strong>B.Tech in Robotics &amp; Automation</strong>
+        (VFSTR, 7.65 CGPA) and a minor in IoT &amp; Embedded Systems. I also hold a Diploma in Mechanical
+        Engineering (SBTET, 75.11%), which gives me a solid hardware foundation.
+      </p>
+      <p>
+        I've completed NSDC-certified advanced training at <strong>Emertxe Information Technologies</strong> —
+        covering bare-metal Embedded C, Linux System Programming (IPC, pThreads, TCP/UDP sockets), and RTOS.
+        I interned at <strong>ExoDrone Systems</strong> (Hyderabad), integrating Pixhawk and Cube Orange
+        flight controllers on quadcopter, hexacopter, fixed-wing and agriculture drone platforms.
+      </p>
+      <p>
+        I've published at ICCSCE-2025 and authored a book chapter — rare outputs for a fresher.
+        Now looking for my first full-time Embedded / Firmware role where I can work with real hardware.
+      </p>
 
-<div class="card">
-<h4>Programming</h4>
-<p>C, C++</p>
-</div>
-
-<div class="card">
-<h4>Embedded Systems</h4>
-<p>Embedded C, PIC, ESP32, Arduino</p>
-</div>
-
-<div class="card">
-<h4>Communication Protocols</h4>
-<p>UART, I2C, SPI</p>
-</div>
-
-<div class="card">
-<h4>Robotics</h4>
-<p>ROS, Gazebo, Sensor Integration</p>
-</div>
-
-</div>
-
-
-</section>
-
-<section id="projects">
-    <h3>Projects</h3>
-
-
-<div class="cards">
-
-    <div class="card">
-        <h4>Fixed Wing UAV</h4>
-        <p>Academic project involving UAV systems and electronics integration.</p>
+      <div class="coursework">
+        <div class="cw-lbl">Relevant Coursework</div>
+        <div class="tags">
+          <span class="tag">Robotics Fundamentals</span>
+          <span class="tag">ROS Programming</span>
+          <span class="tag">Robot Perception</span>
+          <span class="tag">Planning &amp; Navigation</span>
+          <span class="tag">IoT &amp; Smart Manufacturing</span>
+          <span class="tag">Electronic Motors for Robotics</span>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-        <h4>Robotics Projects</h4>
-        <p>Academic robotics projects involving sensors and control systems.</p>
+    <div class="stats-grid fade-up">
+      <div class="stat-card">
+        <div class="stat-num">7.65</div>
+        <div class="stat-lbl">B.Tech CGPA (Robotics &amp; Automation)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8+</div>
+        <div class="stat-lbl">Embedded C projects at Emertxe</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-lbl">UAV platforms (Quad · Hexa · Fixed · Agri)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-lbl">Publications — ICCSCE-2025</div>
+      </div>
     </div>
-
-    <div class="card">
-        <h4>ROS & Gazebo</h4>
-        <p>Currently building robotics simulation projects.</p>
-    </div>
-
-    <div class="card">
-        <h4>OpenCV Projects</h4>
-        <p>Object tracking and computer vision applications.</p>
-    </div>
-
-</div>
-
-
+  </div>
 </section>
 
-<section id="contact">
-<h3>Contact</h3>
+<hr class="divider">
 
-<p>Email: reddymanjunath959@gmail.com</p>
+<!-- ==================== SKILLS ==================== -->
+<section id="skills" class="section">
+  <div class="sec-lbl">02 — Skills</div>
+  <h2 class="sec-title">Technical Toolkit</h2>
 
-<p>
-GitHub:
-<a href="https://github.com/shinchan05" target="_blank">
-github.com/shinchan05
-</a>
-</p>
+  <div class="skills-cols">
+    <div class="fade-up">
+      <div class="sk-grp-lbl">Core Languages</div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">Embedded C</span><span class="skill-pct">88%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="88"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">C / C++ (OOP)</span><span class="skill-pct">80%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="80"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">Python</span><span class="skill-pct">72%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="72"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">Shell Scripting</span><span class="skill-pct">68%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="68"></div></div>
+      </div>
+    </div>
 
-<p>
-LinkedIn:
-<a href="https://www.linkedin.com/in/manjunath-yenneddula-9b3476377/"
-target="_blank">
-linkedin.com/in/manjunath-yenneddula-9b3476377
-</a>
-</p>
+    <div class="fade-up">
+      <div class="sk-grp-lbl">Systems &amp; Protocols</div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">UART / SPI / I²C / CAN</span><span class="skill-pct">84%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="84"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">Linux System Programming</span><span class="skill-pct">78%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="78"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">RTOS / FreeRTOS</span><span class="skill-pct">70%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="70"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-head"><span class="skill-name">ROS2 / Gazebo</span><span class="skill-pct">64%</span></div>
+        <div class="skill-track"><div class="skill-bar" data-w="64"></div></div>
+      </div>
+    </div>
+  </div>
 
+  <div class="tag-section fade-up">
+    <div>
+      <div class="tg-lbl">Microcontrollers</div>
+      <div class="tags">
+        <span class="tag">PIC18F4580</span><span class="tag">ESP32</span>
+        <span class="tag">Arduino</span><span class="tag">STM32</span>
+      </div>
+    </div>
+    <div>
+      <div class="tg-lbl">UAV / Robotics</div>
+      <div class="tags">
+        <span class="tag">Pixhawk</span><span class="tag">Cube Orange</span>
+        <span class="tag">MAVLink</span><span class="tag">Mission Planner</span>
+      </div>
+    </div>
+    <div>
+      <div class="tg-lbl">Linux &amp; Sys Prog</div>
+      <div class="tags">
+        <span class="tag">IPC · Pipe · FIFO</span><span class="tag">pThreads</span>
+        <span class="tag">TCP / UDP Sockets</span><span class="tag">Shared Memory</span>
+      </div>
+    </div>
+    <div>
+      <div class="tg-lbl">Tools</div>
+      <div class="tags">
+        <span class="tag">MPLAB X</span><span class="tag">Keil µVision</span>
+        <span class="tag">GDB</span><span class="tag">Git</span><span class="tag">Linux CLI</span>
+      </div>
+    </div>
+  </div>
 </section>
 
+<hr class="divider">
+
+<!-- ==================== EXPERIENCE ==================== -->
+<section id="experience" class="section">
+  <div class="sec-lbl">03 — Experience &amp; Education</div>
+  <h2 class="sec-title">Journey So Far</h2>
+
+  <div class="timeline">
+    <div class="tl-item fade-up">
+      <div class="tl-date">2023 — 2024 &nbsp;·&nbsp; Bengaluru, India</div>
+      <div class="tl-role">Advanced Embedded Systems Training · NSDC Certified</div>
+      <div class="tl-org">Emertxe Information Technologies</div>
+      <p class="tl-body">
+        Completed professional training in Embedded C, Embedded Linux, Linux System Programming
+        (IPC: Pipe, FIFO, Shared Memory; pThreads; TCP/UDP network programming), and RTOS.
+        Delivered 8 hands-on projects covering data structures, OS concepts, and embedded firmware.
+        Certified under NSDC / Skill India — Electronics Sector Skill Council QP: ELE/Q1501.
+      </p>
+      <div class="tl-tags">
+        <span class="tag">Embedded C</span><span class="tag">Embedded Linux</span>
+        <span class="tag">RTOS</span><span class="tag">pThreads</span>
+        <span class="tag">NSDC Certified</span><span class="tag">ELE/Q1501</span>
+      </div>
+    </div>
+
+    <div class="tl-item fade-up">
+      <div class="tl-date">2024 &nbsp;·&nbsp; Hyderabad, India</div>
+      <div class="tl-role">UAV Engineering Intern</div>
+      <div class="tl-org">ExoDrone Systems</div>
+      <p class="tl-body">
+        Integrated and tested UAV electronics on Pixhawk and Cube Orange flight controllers across
+        quadcopter, hexacopter, fixed-wing, and agriculture drone platforms.
+        Performed ESC calibration, telemetry wiring, sensor validation (accelerometer, gyroscope),
+        and documented autonomous flight test procedures.
+      </p>
+      <div class="tl-tags">
+        <span class="tag">Pixhawk</span><span class="tag">Cube Orange</span>
+        <span class="tag">MAVLink</span><span class="tag">ESC Calibration</span>
+        <span class="tag">VTOL</span><span class="tag">Mission Planner</span>
+      </div>
+    </div>
+
+    <div class="tl-item fade-up">
+      <div class="tl-date">2022 — 2025 &nbsp;·&nbsp; Andhra Pradesh, India</div>
+      <div class="tl-role">B.Tech — Robotics &amp; Automation · CGPA 7.65</div>
+      <div class="tl-org">VFSTR University &nbsp;(Minor: IoT &amp; Embedded Systems)</div>
+      <p class="tl-body">
+        Four-year programme covering robotics, automation, embedded electronics, control theory,
+        sensor integration, and ROS. Published a peer-reviewed conference paper at ICCSCE-2025
+        and authored a book chapter — rare academic outputs at undergraduate level.
+        Also secured a college-funded research project grant.
+      </p>
+      <div class="tl-tags">
+        <span class="tag">Robotics</span><span class="tag">Automation</span>
+        <span class="tag">IoT</span><span class="tag">ROS</span>
+        <span class="tag">Research</span><span class="tag">CGPA 7.65</span>
+      </div>
+    </div>
+
+    <div class="tl-item fade-up">
+      <div class="tl-date">2019 — 2022 &nbsp;·&nbsp; Andhra Pradesh, India</div>
+      <div class="tl-role">Diploma in Mechanical Engineering · 75.11%</div>
+      <div class="tl-org">SBTET, Andhra Pradesh</div>
+      <p class="tl-body">
+        Three-year Diploma providing strong mechanical and manufacturing foundations —
+        a background that directly supports hardware-aware firmware and robotics engineering.
+      </p>
+      <div class="tl-tags">
+        <span class="tag">Mechanical Engineering</span><span class="tag">75.11%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== PROJECTS — FEATURED ==================== -->
+<section id="projects" class="section">
+  <div class="sec-lbl">04 — Projects</div>
+  <h2 class="sec-title">Featured Work</h2>
+
+  <div class="proj-grid">
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🚗</div>
+      <h4 class="proj-title">CAN Automotive Dashboard</h4>
+      <p class="proj-desc">
+        Bare-metal firmware on PIC18F4580 for a multi-node CAN bus system. Implements real-time
+        exchange of vehicle parameters (speed, RPM, fuel, temperature) between ECU nodes,
+        ADC interfacing, SSD display, and digital keypad — a complete embedded firmware project.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">PIC18F4580</span><span class="tag">CAN Bus</span>
+        <span class="tag">Embedded C</span><span class="tag">ADC</span><span class="tag">MPLAB X</span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🐚</div>
+      <h4 class="proj-title">MiniShell — Unix Shell</h4>
+      <p class="proj-desc">
+        Custom Linux shell in C built from scratch — supports internal and external commands,
+        process creation (fork/exec), job control, piping, background process management,
+        and signal handling (Ctrl+C / Ctrl+Z). Demonstrates deep OS-level knowledge.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">C</span><span class="tag">Linux</span>
+        <span class="tag">fork/exec</span><span class="tag">IPC / Pipes</span>
+        <span class="tag">Signals</span><span class="tag">Job Control</span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-icon">✈️</div>
+      <h4 class="proj-title">Fixed Wing UAV</h4>
+      <p class="proj-desc">
+        Assembly and full integration of a fixed-wing UAV — installed electronics, configured
+        the Pixhawk flight controller, tuned PID parameters for stable flight,
+        and validated autonomous waypoint missions in Mission Planner.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">Pixhawk</span><span class="tag">MAVLink</span>
+        <span class="tag">PID Tuning</span><span class="tag">Mission Planner</span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🔍</div>
+      <h4 class="proj-title">Inverted Search Engine</h4>
+      <p class="proj-desc">
+        Word-to-file index built in C using hash tables and linked lists. Reads multiple
+        text files, builds an inverted index mapping every word to the files containing it,
+        and returns results instantly — demonstrating advanced data structures and file I/O.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">C</span><span class="tag">Hash Tables</span>
+        <span class="tag">Linked Lists</span><span class="tag">File I/O</span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🔐</div>
+      <h4 class="proj-title">Image Steganography (LSB)</h4>
+      <p class="proj-desc">
+        Hides and recovers secret messages inside bitmap images using LSB encoding.
+        A secret key secures encode/decode. Demonstrates precise bit manipulation,
+        binary file I/O, and low-level pointer operations — core embedded skills.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">Embedded C</span><span class="tag">LSB Encoding</span>
+        <span class="tag">Bit Manipulation</span><span class="tag">File I/O</span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-up">
+      <div class="proj-icon">🔢</div>
+      <h4 class="proj-title">Arbitrary Precision Calculator</h4>
+      <p class="proj-desc">
+        Arithmetic on numbers beyond all standard data type limits. Each digit is stored
+        as a linked-list node; addition and subtraction traverse nodes while maintaining
+        carry/borrow. Demonstrates dynamic memory and pointer mastery.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">C</span><span class="tag">Linked Lists</span>
+        <span class="tag">Dynamic Memory</span><span class="tag">Pointers</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- More projects -->
+  <div style="margin-top:56px">
+    <div class="sec-lbl" style="margin-bottom:20px;">More Projects</div>
+    <div class="mini-grid fade-up">
+      <div class="mini-card">
+        <div class="mc-icon">🤖</div>
+        <div class="mc-title">Hospitality Service Robot</div>
+        <div class="mc-tags"><span class="mini-tag">Arduino</span><span class="mini-tag">Autonomous Nav</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">🛞</div>
+        <div class="mc-title">Six-Wheeled Rover</div>
+        <div class="mc-tags"><span class="mini-tag">Arduino</span><span class="mini-tag">Motor Control</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">📡</div>
+        <div class="mc-title">LIDAR Mapping Robot</div>
+        <div class="mc-tags"><span class="mini-tag">LIDAR</span><span class="mini-tag">ROS</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">🚁</div>
+        <div class="mc-title">Quadcopter / Hexacopter</div>
+        <div class="mc-tags"><span class="mini-tag">Pixhawk</span><span class="mini-tag">ESC</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">🌾</div>
+        <div class="mc-title">Agriculture Drone</div>
+        <div class="mc-tags"><span class="mini-tag">UAV</span><span class="mini-tag">Payload</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">🔤</div>
+        <div class="mc-title">Lexical Analyzer</div>
+        <div class="mc-tags"><span class="mini-tag">C</span><span class="mini-tag">Compiler Design</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">📇</div>
+        <div class="mc-title">Address Book</div>
+        <div class="mc-tags"><span class="mini-tag">C</span><span class="mini-tag">Dynamic Memory</span></div>
+      </div>
+      <div class="mini-card">
+        <div class="mc-icon">🎓</div>
+        <div class="mc-title">CGPA Calculator</div>
+        <div class="mc-tags"><span class="mini-tag">C</span><span class="mini-tag">File I/O</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== PUBLICATIONS & ACHIEVEMENTS ==================== -->
+<section class="section">
+  <div class="sec-lbl">05 — Research &amp; Achievements</div>
+  <h2 class="sec-title">Publications &amp; Recognition</h2>
+
+  <div style="margin-bottom:32px">
+    <div style="font-family:var(--fm);font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:600;margin-bottom:16px;">Publications</div>
+    <div class="pub-card fade-up" style="margin-bottom:14px">
+      <div class="pub-type">📄 &nbsp;Conference Paper</div>
+      <div class="pub-title">
+        Development of a Semi-Smart IoT Enabled Humanoid Robot for Obstacle Detection,
+        Surveillance and Hospitality Services
+      </div>
+      <p class="pub-venue">ICCSCE-2025 &nbsp;·&nbsp; International Conference on Computer Science &amp; Communication Engineering &nbsp;·&nbsp; 2025</p>
+    </div>
+    <div class="pub-card fade-up">
+      <div class="pub-type">📚 &nbsp;Book Chapter</div>
+      <div class="pub-title">
+        "The Need for Human Intervention in Automation"
+      </div>
+      <p class="pub-venue">2025 &nbsp;·&nbsp; Engineering / Automation domain publication &nbsp;·&nbsp; Rare contribution at undergraduate level</p>
+    </div>
+  </div>
+
+  <div style="font-family:var(--fm);font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:600;margin-bottom:16px;">Achievements</div>
+  <div class="pub-ach-grid">
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🏆</div>
+      <div>
+        <div class="ach-title">JANATICS Automation Skill Competition</div>
+        <div class="ach-desc">Reached the finalist stage in a national-level automation skill competition — recognition of practical embedded and automation knowledge.</div>
+      </div>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🔬</div>
+      <div>
+        <div class="ach-title">College-Funded Research Project</div>
+        <div class="ach-desc">Secured institutional funding from VFSTR University for an engineering research project — a competitive grant awarded to select undergraduate students.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="section">
+  <div class="sec-lbl">06 — Contact</div>
+  <h2 class="sec-title">Let's Connect</h2>
+  <div class="contact-grid">
+    <div class="contact-text fade-up">
+      <p>
+        I'm actively looking for my first full-time role in Embedded Systems or Firmware Engineering
+        in Bangalore. If you have an opening — or just want to talk hardware — I'd love to hear from you.
+      </p>
+      <div class="open-to">
+        <strong>Open To</strong>
+        Embedded Systems Engineer &nbsp;·&nbsp; Firmware Engineer &nbsp;·&nbsp;
+        Robotics Engineer &nbsp;·&nbsp; 0–1 yr experience roles in Bangalore
+      </div>
+    </div>
+
+    <div class="contact-links fade-up">
+      <a class="cl" href="mailto:reddymanjunath959@gmail.com">
+        <div class="cl-icon">✉</div>
+        <div>
+          <div class="cl-lbl">Email</div>
+          <div class="cl-val">reddymanjunath959@gmail.com</div>
+        </div>
+      </a>
+      <a class="cl" href="tel:+919494440563">
+        <div class="cl-icon">📞</div>
+        <div>
+          <div class="cl-lbl">Phone</div>
+          <div class="cl-val">+91 94944 40563</div>
+        </div>
+      </a>
+      <a class="cl" href="https://www.linkedin.com/in/manjunath-yenneddula-9b3476377/" target="_blank">
+        <div class="cl-icon" style="font-size:.85rem;">in</div>
+        <div>
+          <div class="cl-lbl">LinkedIn</div>
+          <div class="cl-val">Manjunath Yenneddula</div>
+        </div>
+      </a>
+      <a class="cl" href="https://github.com/shinchan05" target="_blank">
+        <div class="cl-icon">⌥</div>
+        <div>
+          <div class="cl-lbl">GitHub</div>
+          <div class="cl-val">github.com/shinchan05</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
 <footer>
-    © 2026 Manjunath Reddy
+  Designed &amp; Built by <em>Manjunath Reddy</em> &nbsp;·&nbsp; Bangalore, India &nbsp;·&nbsp; 2026
 </footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  /* ---- Generate twinkling stars + floating robots ---- */
+  (function() {
+    const layer = document.getElementById('bg-deco');
+    const W = window.innerWidth, H = document.body.scrollHeight || 3000;
+
+    const STAR_CHARS = ['✦','✧','⋆','✴','✵','⟡'];
+    const starCount = 38;
+
+    for (let i = 0; i < starCount; i++) {
+      const el = document.createElement('div');
+      el.className = 'deco-star';
+      el.textContent = STAR_CHARS[i % STAR_CHARS.length];
+      const sz  = (Math.random() * 7 + 7).toFixed(1);
+      const del = (Math.random() * 5).toFixed(2);
+      const dur = (Math.random() * 2.5 + 2).toFixed(2);
+      const op  = (Math.random() * 0.28 + 0.07).toFixed(2);
+      el.style.cssText =
+        'left:'   + (Math.random()*98).toFixed(1) + '%;' +
+        'top:'    + (Math.random()*98).toFixed(1) + '%;' +
+        'font-size:' + sz  + 'px;' +
+        '--dur:'  + dur + 's;' +
+        '--del:-' + del + 's;' +
+        'opacity:'+ op  + ';';
+      layer.appendChild(el);
+    }
+
+    /* Fixed robot positions — edges only, not blocking content */
+    const ROBOTS = [
+      {l:'1.5%', t:'8%',  sz:14, op:.1,  dur:6.5, del:0},
+      {l:'96%',  t:'16%', sz:13, op:.09, dur:7,   del:1.2},
+      {l:'1%',   t:'38%', sz:15, op:.1,  dur:5.8, del:2.5},
+      {l:'97%',  t:'52%', sz:13, op:.09, dur:6.8, del:0.7},
+      {l:'2%',   t:'70%', sz:14, op:.1,  dur:7.2, del:3.1},
+      {l:'95%',  t:'80%', sz:13, op:.09, dur:5.5, del:1.8},
+    ];
+
+    ROBOTS.forEach(r => {
+      const el = document.createElement('div');
+      el.className = 'deco-robot';
+      el.textContent = '🤖';
+      el.style.cssText =
+        'left:'  + r.l + ';' +
+        'top:'   + r.t + ';' +
+        '--sz:'  + r.sz  + 'px;' +
+        '--op:'  + r.op  + ';' +
+        '--dur:' + r.dur + 's;' +
+        '--del:-'+ r.del + 's;';
+      layer.appendChild(el);
+    });
+  })();
+
+  /* ---- Scroll fade-up ---- */
+  const faders = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 70);
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  faders.forEach(el => fadeObs.observe(el));
+
+  /* ---- Skill bar fill on scroll ---- */
+  const bars = document.querySelectorAll('.skill-bar');
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.w + '%';
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  bars.forEach(b => barObs.observe(b));
+</script>
 
 </body>
 </html>
-
